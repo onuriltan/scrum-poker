@@ -3,6 +3,7 @@ const app = express();
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const router = require('./app/routes');
 
 // Read Environment Variables
 const dotenv = require('dotenv');
@@ -15,6 +16,8 @@ app.use(bodyParser.json());
 app.use(logger('tiny'));
 app.use(cors());
 
+// Load Routes
+router(app);
 
 // Run the Express App
 const port = process.env.PORT || 5000;
