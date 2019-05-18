@@ -13,5 +13,16 @@ class PokerService {
       }
     })
   }
+
+  static getStoriesByPokerName (pokerName) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.get(`${url}/stories?pokerName=${pokerName}`)
+        resolve(res)
+      } catch (e) {
+        reject(e.response)
+      }
+    })
+  }
 }
 export default PokerService

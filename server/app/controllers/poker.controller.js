@@ -1,4 +1,4 @@
-let poker = require('../models/Poker');
+let poker = require('../db/PokerDb');
 
 exports.create = async function (req, res) {
   const {name, voterCount, storyList } = req.body
@@ -7,6 +7,11 @@ exports.create = async function (req, res) {
   if(existingPoker) {
     return res.status(403).send({error: "Poker already exists"});
   }
-  poker.create(name, voterCount, storyList);
-  return res.sendStatus(200);
+  let pokerName = poker.create(name, voterCount, storyList);
+  return res.status(200).send({pokerName});
+};
+
+exports.storyList = async function (req, res) {
+  const {pokerName} = req.query
+
 };
