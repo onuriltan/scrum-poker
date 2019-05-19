@@ -96,6 +96,8 @@
           let storyList = this.toArray(this.form.storyList)
           let data = {name: this.form.name, voterCount: this.form.voterCount, storyList}
           this.loading = true
+          this.error = null
+          setTimeout(() => {
           pokerService.create(data).then((res) => {
             this.error = null
             this.loading = false
@@ -104,6 +106,7 @@
             this.error = error.data.error
             this.loading = false
           })
+          }, 1000)
         }
       },
       toArray(input) {

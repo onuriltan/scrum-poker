@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import CreatePoker from './views/CreatePoker.vue'
-import MasterDashboard from './views/MasterDashboard.vue'
+import MasterBoard from './views/MasterBoard.vue'
 import TeamBoard from './views/TeamBoard.vue'
 
 Vue.use(Router)
@@ -14,7 +14,7 @@ const router = new Router({
     {
       path: '/master-dashboard/:pokerName',
       name: 'master-dashboard',
-      component: MasterDashboard,
+      component: MasterBoard,
       meta: {title: 'Master Dashboard'}
     },
     {path: '/team-board/:pokerName', name: 'team-board', component: TeamBoard, meta: {title: 'Team Board'}}

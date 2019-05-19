@@ -1,11 +1,11 @@
 <template>
     <b-card class="card-body h-100" body-class="card-body">
-      <div class=" h-100 d-flex flex-wrap justify-content-center">
+      <div class="d-flex flex-wrap justify-content-center">
         <b-button style="width: 60px; height: 40px; margin: 10px" v-for="number in numbers" :key="number" :disabled="disableButton"
                   variant="outline-success" @click="makeVote(number)">{{number}}
         </b-button>
-        <div class="pt-4"> {{voteLabel}}</div>
       </div>
+      <div class="pt-1 text-center"> {{voteLabel}}</div>
     </b-card>
 </template>
 
@@ -13,7 +13,7 @@
   import pokerService from "../services/poker.service"
 
   export default {
-    name: "ActiveStory",
+    name: "VotePanel",
     data() {
       return {
         numbers: [],

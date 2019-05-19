@@ -62,7 +62,7 @@ class PokerDb {
   }
 
   getPokerByName(name) {
-    return this.pokers.find(poker => poker.name === name);
+    return this.pokers.find(poker => poker.pokerName === name);
   }
 
   getPokerURL(pokerName){

@@ -23,7 +23,7 @@
                      :endVoteEnabled="endVoteEnabled"/>
       </div>
       <div class="col mb-3">
-        <ActiveStory :voter="voter" :storyName="currentStoryName" :pokerName="pokerName"/>
+        <VotePanel :voter="voter" :storyName="currentStoryName" :pokerName="pokerName"/>
       </div>
     </div>
   </div>
@@ -32,11 +32,11 @@
 <script>
   import pokerService from '../services/poker.service'
   import MasterPanel from "../components/MasterPanel";
-  import ActiveStory from "../components/ActiveStory";
+  import VotePanel from "../components/VotePanel";
 
   export default {
-    name: "MasterDashboard",
-    components: {ActiveStory, MasterPanel},
+    name: "MasterBoard",
+    components: {VotePanel, MasterPanel},
     data() {
       return {
         storyList: [],

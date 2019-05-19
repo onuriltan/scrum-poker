@@ -12,7 +12,7 @@
         <b-table class="h-100" bordered :items="storyList"></b-table>
       </div>
       <div class="col">
-        <ActiveStory :voter="voter" :storyName="currentStoryName" :pokerName="pokerName"/>
+        <VotePanel :voter="voter" :storyName="currentStoryName" :pokerName="pokerName"/>
       </div>
     </div>
   </div>
@@ -21,11 +21,11 @@
 
 <script>
   import pokerService from '../services/poker.service'
-  import ActiveStory from "../components/ActiveStory";
+  import VotePanel from "../components/VotePanel";
 
   export default {
     name: "TeamBoard",
-    components: {ActiveStory},
+    components: {VotePanel},
     data() {
       return {
         storyList: [],
