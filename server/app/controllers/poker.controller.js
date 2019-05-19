@@ -34,3 +34,17 @@ exports.getVotes = async function (req, res) {
   return res.status(200).send(voteEntities);
 };
 
+exports.makeVote = async function (req, res) {
+  const {poker, story, point, voter} = req.body
+  pokerDb.makeVoteByPokerAndStory(story, poker, point, voter);
+
+  return res.sendStatus(200);
+};
+
+exports.endVoting = async function (req, res) {
+  const {story, poker, finalPoint} = req.body
+  pokerDb.setFinalVoteOfStory(story, poker, finalPoint);
+
+  return res.sendStatus(200);
+};
+

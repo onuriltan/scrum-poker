@@ -46,5 +46,31 @@ class PokerService {
       }
     })
   }
+
+  static makeVote (story, poker, point, voter) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.post(`${url}/makeVote`, {story, poker, point, voter})
+        resolve(res)
+      } catch (e) {
+        reject(e.response)
+      }
+    })
+  }
+
+  static endVoting(story, poker, finalPoint) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.post(`${url}/endVoting`, {story, poker, finalPoint})
+        resolve(res)
+      } catch (e) {
+        reject(e.response)
+      }
+    })
+  }
+
+
+
+
 }
 export default PokerService

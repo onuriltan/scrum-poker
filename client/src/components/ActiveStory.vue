@@ -1,24 +1,31 @@
 <template>
-  <div class="h-100">
-    <h4>Active Story</h4>
     <b-card
-        class="card-body" body-class="card-body" title="Story 1">
-      <div class="h-100 d-flex flex-wrap justify-content-center">
-        <b-button style="width: 60px; height: 40px; margin: 10px" v-for="number in numbers"
-                  :key="number" variant="outline-success">{{number}}
+        class="card-body h-100" body-class="card-body">
+      <div class=" h-100 d-flex flex-wrap justify-content-center">
+        <b-button style="width: 60px; height: 40px; margin: 10px" v-for="number in numbers" :key="number"
+                  variant="outline-success" @click="makeVote(number)">{{number}}
         </b-button>
+        <div class="pt-4"> {{voteLabel}}</div>
       </div>
     </b-card>
-  </div>
 </template>
 
 <script>
+  import pokerService from "../services/poker.service"
+
   export default {
     name: "ActiveStory",
     data() {
       return {
-        numbers: []
+        numbers: [],
+        voteLabel: 'Please vote !!',
+        point: null
       }
+    },
+    props: {
+      storyName: String,
+      voter: String,
+      pokerName: String
     },
     methods: {
       fibonacci(n) {
@@ -26,6 +33,13 @@
         if (n === 1) return [1, 2]
         const arr = this.fibonacci(n - 1)
         return [...arr, arr[n - 1] + arr[n - 2]]
+      },
+      makeVote(point) {
+        pokerService.makeVote(this.storyName, this.pokerName, point, this.voter).then(res => {
+
+        }).catch(err => {
+          console.log(err)
+        })
       }
     },
     mounted() {

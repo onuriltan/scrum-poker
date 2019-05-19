@@ -4,7 +4,7 @@
       <b-table class="h-100" bordered :items="storyList"></b-table>
     </div>
     <div class="col">
-      <ActiveStory/>
+      <ActiveStory :voter="voter" :storyName="currentStoryName" :pokerName="pokerName"/>
     </div>
   </div>
 </template>
@@ -19,20 +19,29 @@
     data(){
       return {
         storyList: [],
+        voter: "Voter",
+        currentStoryName: '',
         pokerName: this.$route.params.pokerName
       }
     },
     mounted() {
       this.getStories()
+      setInterval(this.getStories, 2000)
     },
     methods: {
       getStories() {
         pokerService.getStories(this.pokerName).then(res => {
           this.storyList = res.data
+          this.currentStoryName = this.getCurrentStory().name
         }).catch(err => {
           console.log(err)
         })
-      }
+      },
+      getCurrentStory() {
+        return this.storyList.find(story => {
+          return story.status === 'Not Voted'
+        })
+      },
     }
   }
 </script>

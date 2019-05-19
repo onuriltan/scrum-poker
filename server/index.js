@@ -13,7 +13,7 @@ dotenv.config();
 // Middlewares for Express
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(logger('tiny'));
+//app.use(logger('tiny'));
 app.use(cors());
 
 // Load Routes

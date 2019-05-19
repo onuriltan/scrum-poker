@@ -8,6 +8,8 @@ module.exports = function (app) {
   apiRoutes.get('/getPokerURL', pokerController.getPokerURL)
   apiRoutes.get('/getStories', pokerController.getStories)
   apiRoutes.get('/getVotes', pokerController.getVotes)
+  apiRoutes.post('/makeVote', pokerController.makeVote)
+  apiRoutes.post('/endVoting', pokerController.endVoting)
 
 
   app.use('/api', apiRoutes);
