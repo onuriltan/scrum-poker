@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-100">
     <b-card class="h-100 card-body" body-class="card-body" :title="storyName+' active'">
       <b-card-text v-for="vote in voteList" :key="vote.voter">
         <div class="p-2">{{vote.voter}} : {{vote.point}}</div>

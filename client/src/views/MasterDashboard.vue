@@ -2,11 +2,11 @@
   <div>
     <div class="row ">
       <div class="col pb-4">
-        Please share link to developers: {{pokerURL}}
+        Please share link to developers: <b>{{pokerURL}}</b>
       </div>
     </div>
     <div class="row">
-      <div class="col ">
+      <div class="col">
         <b-table class="h-100 rounded" bordered :items="storyList"></b-table>
       </div>
       <div class="col">
@@ -83,7 +83,7 @@
         let voteCount = 0;
         let votedStoryCount = 0
         this.voteList.forEach(vote => {
-          if (!isNaN(vote.point)) voteCount += 1;
+          if (vote.point !== "Not Voted") voteCount += 1;
         });
         this.storyList.forEach(story => {
           if (!isNaN(story.point)) votedStoryCount += 1;
