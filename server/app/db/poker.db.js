@@ -1,7 +1,7 @@
 const PokerEntity = require('./entity/poker.entity');
 const StoryEntity = require('./entity/story.entity');
 const VoteEntity = require('./entity/vote.entity');
-const pokerUtils = require('../utils/poker.utils')
+const pokerUtil = require('../utils/poker.util')
 
 class PokerDb {
 
@@ -12,7 +12,7 @@ class PokerDb {
   }
 
   createPoker(pokerName, voterCount, storyList) {
-    let pokerURL = pokerUtils.createPokerURL(pokerName);
+    let pokerURL = pokerUtil.createPokerURL(pokerName);
     const poker = new PokerEntity(pokerName, voterCount, pokerURL);
     this.pokers.push(poker);
 

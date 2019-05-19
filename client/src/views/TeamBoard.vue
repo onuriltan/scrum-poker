@@ -9,7 +9,7 @@
     </div>
     <div class="row ">
       <div class="col">
-        <b-table class="h-100" bordered :items="storyList"></b-table>
+        <StoryTable :storyList="this.storyList" :currentStory="this.currentStoryName"/>
       </div>
       <div class="col">
         <VotePanel :voter="voter" :storyName="currentStoryName" :pokerName="pokerName"/>
@@ -22,10 +22,11 @@
 <script>
   import pokerService from '../services/poker.service'
   import VotePanel from "../components/VotePanel";
+  import StoryTable from "../components/StoryTable";
 
   export default {
     name: "TeamBoard",
-    components: {VotePanel},
+    components: {VotePanel, StoryTable},
     data() {
       return {
         storyList: [],
@@ -55,7 +56,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

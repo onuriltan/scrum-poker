@@ -16,7 +16,7 @@
     </div>
     <div class="row">
       <div class="col mb-3">
-        <b-table class="h-100 rounded" bordered :items="storyList"></b-table>
+        <StoryTable :storyList="this.storyList" :currentStory="this.currentStoryName"/>
       </div>
       <div class="col mb-3">
         <MasterPanel :storyName="currentStoryName" :pokerName="pokerName" :voteList="voteList"
@@ -33,10 +33,11 @@
   import pokerService from '../services/poker.service'
   import MasterPanel from "../components/MasterPanel";
   import VotePanel from "../components/VotePanel";
+  import StoryTable from "../components/StoryTable";
 
   export default {
     name: "MasterBoard",
-    components: {VotePanel, MasterPanel},
+    components: {StoryTable, VotePanel, MasterPanel},
     data() {
       return {
         storyList: [],
@@ -96,7 +97,6 @@
         });
         this.storyList.forEach(story => {
           if (!isNaN(story.point)) votedStoryCount += 1;
-
         });
         if (votedStoryCount === this.storyList.length && votedStoryCount !== 0) {
           this.endVoteEnabled = true
@@ -110,6 +110,3 @@
     }
   }
 </script>
-
-<style scoped>
-</style>
