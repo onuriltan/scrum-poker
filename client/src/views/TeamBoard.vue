@@ -49,10 +49,12 @@
         })
       },
       getCurrentStory() {
-        return this.storyList.find(story => {
+        let currentStory = this.storyList.find(story => {
           return story.status === 'Not Voted'
         })
-      },
+        if (currentStory) this.currentStoryName = currentStory.name
+        else this.currentStoryName = this.storyList[this.storyList.length -1].name
+      }
     }
   }
 </script>

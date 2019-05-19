@@ -79,6 +79,7 @@
           return story.status === 'Not Voted'
         })
         if (currentStory) this.currentStoryName = currentStory.name
+        else this.currentStoryName = this.storyList[this.storyList.length -1].name
       },
 
       getPokerURL() {
