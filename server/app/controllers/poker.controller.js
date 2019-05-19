@@ -11,6 +11,12 @@ exports.createPoker = async function (req, res) {
   return res.status(200).send({pokerName});
 };
 
+exports.getPokerURL = async function (req, res) {
+  const {poker} = req.query
+  const pokerURL = pokerDb.getPokerURL(poker)
+  return res.status(200).send({pokerURL})
+};
+
 exports.getStories = async function (req, res) {
   const {poker} = req.query
   let storyEntites = pokerDb.getStoryListByPokerName(poker);

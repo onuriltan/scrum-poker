@@ -6,7 +6,7 @@ const pokerUtils = require('../utils/poker.utils')
 class PokerDb {
 
   constructor() {
-    this.pockers = [];
+    this.pokers = [];
     this.stories = [];
     this.votes = [];
   }
@@ -14,7 +14,7 @@ class PokerDb {
   createPoker(pokerName, voterCount, storyList) {
     let pokerURL = pokerUtils.createPokerURL(pokerName);
     const poker = new PokerEntity(pokerName, voterCount, pokerURL);
-    this.pockers.push(poker);
+    this.pokers.push(poker);
 
     storyList.map(storyName => {
       const newStory = new StoryEntity(storyName, pokerName, "Not Voted", null)
@@ -47,8 +47,14 @@ class PokerDb {
 
   }
 
+  getPokerURL(pokerName){
+    let poker = this.pokers.find(poker => poker.pokerName === pokerName)
+    if(poker) return poker.pokerURL;
+    else return ''
+  }
+
   getPokerByName(name) {
-    return this.pockers.find(poker => poker.name === name);
+    return this.pokers.find(poker => poker.name === name);
   }
 }
 

@@ -35,5 +35,16 @@ class PokerService {
       }
     })
   }
+
+  static getPokerURL (pokerName) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.get(`${url}/getPokerURL?poker=${pokerName}`)
+        resolve(res)
+      } catch (e) {
+        reject(e.response)
+      }
+    })
+  }
 }
 export default PokerService
