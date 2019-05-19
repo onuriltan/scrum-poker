@@ -30,11 +30,6 @@ class PokerDb {
     return pokerName;
   }
 
-  voteByStoryName(storyName, pokerName, point) {
-    const vote = new VoteEntity(storyName, point)
-    this.votes.push(vote)
-  }
-
   getStoryListByPokerName(pokerName) {
     return this.stories.reduce((stories, story) => {
       if (story.pokerName === pokerName) stories.push(story);
