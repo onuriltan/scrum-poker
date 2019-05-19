@@ -6,14 +6,14 @@
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col mb-3">
         <b-table class="h-100 rounded" bordered :items="storyList"></b-table>
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <MasterPanel :storyName="currentStoryName" :pokerName="pokerName" :voteList="voteList"
                      :endVoteEnabled="endVoteEnabled"/>
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <ActiveStory :voter="voter" :storyName="currentStoryName" :pokerName="pokerName"/>
       </div>
     </div>

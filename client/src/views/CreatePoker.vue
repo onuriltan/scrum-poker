@@ -27,7 +27,7 @@
                          :state="inValidStoryList"
                          @keydown.native="validateStoryList"></b-form-textarea>
         <b-form-invalid-feedback :state="inValidStoryList">
-          {{errors.voterCount}}
+          {{errors.storyList}}
         </b-form-invalid-feedback>
       </b-form-group>
       <b-button class="mt-5 float-right" type="submit" variant="primary">

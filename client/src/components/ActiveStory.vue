@@ -1,8 +1,7 @@
 <template>
-    <b-card
-        class="card-body h-100" body-class="card-body">
+    <b-card class="card-body h-100" body-class="card-body">
       <div class=" h-100 d-flex flex-wrap justify-content-center">
-        <b-button style="width: 60px; height: 40px; margin: 10px" v-for="number in numbers" :key="number"
+        <b-button style="width: 60px; height: 40px; margin: 10px" v-for="number in numbers" :key="number" :disabled="disableButton"
                   variant="outline-success" @click="makeVote(number)">{{number}}
         </b-button>
         <div class="pt-4"> {{voteLabel}}</div>
@@ -19,13 +18,18 @@
       return {
         numbers: [],
         voteLabel: 'Please vote !!',
-        point: null
+        point: null,
+        disableButton: false
       }
     },
     props: {
       storyName: String,
       voter: String,
-      pokerName: String
+      pokerName: String,
+    },
+    mounted() {
+      this.numbers = this.fibonacci(10)
+      this.numbers.push('?')
     },
     methods: {
       fibonacci(n) {
@@ -35,16 +39,19 @@
         return [...arr, arr[n - 1] + arr[n - 2]]
       },
       makeVote(point) {
-        pokerService.makeVote(this.storyName, this.pokerName, point, this.voter).then(res => {
-
+        pokerService.makeVote(this.storyName, this.pokerName, point, this.voter).then(() => {
+          this.disableButton = true
         }).catch(err => {
           console.log(err)
         })
       }
     },
-    mounted() {
-      this.numbers = this.fibonacci(10)
-      this.numbers.push('?')
+    watch: {
+      storyName: function(newVal, oldVal) {
+        if(newVal !== oldVal){
+          this.disableButton = false
+        }
+      }
     }
   }
 </script>
