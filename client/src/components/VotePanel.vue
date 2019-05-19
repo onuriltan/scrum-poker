@@ -52,7 +52,6 @@
         if(newVal !== oldVal){
           this.disableButton = false
           this.voteLabel = "Please vote !"
-
         }
       }
     }

@@ -11,6 +11,5 @@ module.exports = function (app) {
   apiRoutes.post('/makeVote', pokerController.makeVote)
   apiRoutes.post('/endVoting', pokerController.endVoting)
 
-
   app.use('/api', apiRoutes);
 }

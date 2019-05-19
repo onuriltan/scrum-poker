@@ -8,7 +8,7 @@
             <b-form-input v-model="form.name" type="text" :state="inValidPokerName"
                           @keydown.native="validatePokerName"></b-form-input>
             <b-form-invalid-feedback :state="inValidPokerName">
-             {{errors.pokerName}}
+              {{errors.pokerName}}
             </b-form-invalid-feedback>
           </b-form-group>
         </div>
@@ -47,65 +47,74 @@
     data() {
       return {
         form: {
-          name: 'p1',
-          voterCount: 3,
-          storyList: 's1'
-        },
-        errors: {
-          pokerName: null,
+          name: null,
           voterCount: null,
           storyList: null
         },
+        errors: {
+          pokerName: '',
+          voterCount: '',
+          storyList: ''
+        },
         error: null,
-        loading: false
+        loading: false,
+        pokerNameEntered: false,
+        voterCountEntered: false,
+        storyListEntered: false
       }
     },
     computed: {
       inValidPokerName() {
-        return this.errors.pokerName === null
+        if (this.pokerNameEntered && this.errors.pokerName === null) return true
+        if (this.pokerNameEntered && this.errors.pokerName !== null) return false
+        return null
       },
       inValidVoterCount() {
-        return this.errors.voterCount === null
+        if (this.voterCountEntered && this.errors.voterCount === null) return true
+        if (this.voterCountEntered && this.errors.voterCount !== null) return false
+        return null
       },
       inValidStoryList() {
-        return this.errors.storyList === null
+        if (this.storyListEntered && this.errors.storyList === null) return true
+        if (this.storyListEntered && this.errors.storyList !== null) return false
+        return null
       },
     },
     methods: {
-      validatePokerName () {
+      validatePokerName() {
         setTimeout(() => {
           this.errors.pokerName = validationService.pokerName(this.form.name)
-        }, 600)
+          this.pokerNameEntered = true
+        }, 500)
       },
-      validateVoterCount () {
+      validateVoterCount() {
         setTimeout(() => {
+          this.voterCountEntered = true
           this.errors.voterCount = validationService.voters(this.form.voterCount)
-        }, 600)
+        }, 500)
       },
-      validateStoryList () {
+      validateStoryList() {
         setTimeout(() => {
-          this.errors.storyList = validationService.storyList(this.form.storyList)
-        }, 600)
+          this.storyListEntered = true
+          this.errors.storyList = validationService.storyList(this.toArray(this.form.storyList))
+        }, 500)
       },
-      async createPoker() {
-        this.errors.pokerName = validationService.pokerName(this.form.name);
-        this.errors.voterCount = validationService.voters(this.form.voterCount);
-        this.errors.storyList = validationService.storyList(this.form.storyList);
-
+      createPoker() {
+        this.validateForm()
         if (!this.errors.pokerName && !this.errors.voterCount && !this.errors.storyList) {
           let storyList = this.toArray(this.form.storyList)
           let data = {name: this.form.name, voterCount: this.form.voterCount, storyList}
           this.loading = true
           this.error = null
           setTimeout(() => {
-          pokerService.create(data).then((res) => {
-            this.error = null
-            this.loading = false
-            this.$router.push({name: 'master-dashboard', params: {pokerName: res.data.pokerName}})
-          }).catch(error => {
-            this.error = error.data.error
-            this.loading = false
-          })
+            pokerService.create(data).then((res) => {
+              this.error = null
+              this.loading = false
+              this.$router.push({name: 'master-dashboard', params: {pokerName: res.data.pokerName}})
+            }).catch(error => {
+              this.error = error.data.error
+              this.loading = false
+            })
           }, 1000)
         }
       },
@@ -114,6 +123,14 @@
         return array.filter(str => {
           return str.length > 0 && Boolean
         });
+      },
+      validateForm() {
+        this.errors.pokerName = validationService.pokerName(this.form.name);
+        this.errors.voterCount = validationService.voters(this.form.voterCount);
+        this.errors.storyList = validationService.storyList(this.toArray(this.form.storyList));
+        this.pokerNameEntered = true
+        this.voterCountEntered = true
+        this.storyListEntered = true
       }
     }
   }

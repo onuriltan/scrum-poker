@@ -42,7 +42,6 @@
 <style scoped>
   .card-body {
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
     padding: 10px;
   }
