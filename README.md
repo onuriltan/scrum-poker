@@ -1,4 +1,6 @@
-Install dependencies with `npm install`
+To Install dependencies 
+* Go to root folder and run `npm install`
+* Go to root cliend folder and run `npm install`
 
 ### Development
 * Go to root folder and create an .env file
