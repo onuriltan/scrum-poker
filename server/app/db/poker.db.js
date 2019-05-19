@@ -19,7 +19,7 @@ class PokerDb {
     storyList.map(storyName => {
       const newStory = new StoryEntity(storyName, pokerName, "Not Voted", null)
       this.stories.push(newStory);
-      for(let i = 0 ; i<=voterCount ; i++){
+      for(let i = 1 ; i<=voterCount ; i++){
         const vote = new VoteEntity(storyName, pokerName, "Voter "+i , "Not Voted")
         this.votes.push(vote);
       }
@@ -33,14 +33,18 @@ class PokerDb {
   }
 
   getStoryListByPokerName(pokerName) {
-    return this.stories.reduce(function (stories, story) {
+    return this.stories.reduce((stories, story) => {
       if (story.pokerName === pokerName) stories.push(story);
       return stories
     }, []);
   }
 
   getVotesByStoryAndPokerName(story, poker) {
-    return this.votes.map(vote => vote.story === story && vote.poker === poker)
+    return this.votes.reduce((votes, vote) => {
+      if (vote.story === story && vote.poker === poker) votes.push(vote);
+      return votes
+    }, []);
+
   }
 
   getPokerByName(name) {

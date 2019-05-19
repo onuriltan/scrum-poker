@@ -24,6 +24,7 @@ exports.getStories = async function (req, res) {
 exports.getVotes = async function (req, res) {
   const {poker, story} = req.query
   let voteEntities = pokerDb.getVotesByStoryAndPokerName(poker, story);
+
   return res.status(200).send(voteEntities);
 };
 

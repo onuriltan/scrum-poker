@@ -33,9 +33,9 @@
     data() {
       return {
         form: {
-          name: '',
-          voterCount: '',
-          storyList: ''
+          name: 'p1',
+          voterCount: 3,
+          storyList: 's1'
         },
         error: null,
         loading: false
