@@ -1,12 +1,22 @@
 <template>
-  <div class="row ">
-    <div class="col">
-      <b-table class="h-100" bordered :items="storyList"></b-table>
+  <div>
+    <div class="row ">
+      <div class="col pb-4">
+        <div style="font-size: 25px; text-align: right">
+          Active Story: <b>{{currentStoryName}}</b>
+        </div>
+      </div>
     </div>
-    <div class="col">
-      <ActiveStory :voter="voter" :storyName="currentStoryName" :pokerName="pokerName"/>
+    <div class="row ">
+      <div class="col">
+        <b-table class="h-100" bordered :items="storyList"></b-table>
+      </div>
+      <div class="col">
+        <ActiveStory :voter="voter" :storyName="currentStoryName" :pokerName="pokerName"/>
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -16,7 +26,7 @@
   export default {
     name: "TeamBoard",
     components: {ActiveStory},
-    data(){
+    data() {
       return {
         storyList: [],
         voter: "Voter",

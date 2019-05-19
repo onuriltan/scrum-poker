@@ -17,7 +17,7 @@
     data() {
       return {
         numbers: [],
-        voteLabel: 'Please vote !!',
+        voteLabel: 'Please vote !',
         point: null,
         disableButton: false
       }
@@ -41,6 +41,7 @@
       makeVote(point) {
         pokerService.makeVote(this.storyName, this.pokerName, point, this.voter).then(() => {
           this.disableButton = true
+          this.voteLabel = point + " voted"
         }).catch(err => {
           console.log(err)
         })
@@ -50,6 +51,8 @@
       storyName: function(newVal, oldVal) {
         if(newVal !== oldVal){
           this.disableButton = false
+          this.voteLabel = "Please vote !"
+
         }
       }
     }

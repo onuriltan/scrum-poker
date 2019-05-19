@@ -2,7 +2,16 @@
   <div>
     <div class="row ">
       <div class="col pb-4">
-        Please share link to developers: <b>{{pokerURL}}</b>
+        <div style="font-size: 14px; text-align: center">
+          Please share link to developers: <b>{{pokerURL}}</b>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col pb-4">
+        <div style="font-size: 25px; text-align: center">
+          Active Story: <b>{{currentStoryName}}</b>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -65,10 +74,10 @@
       },
 
       getCurrentStory() {
-        let currentStory =  this.storyList.find(story => {
+        let currentStory = this.storyList.find(story => {
           return story.status === 'Not Voted'
         })
-        if(currentStory) this.currentStoryName = currentStory.name
+        if (currentStory) this.currentStoryName = currentStory.name
       },
 
       getPokerURL() {
@@ -89,13 +98,12 @@
           if (!isNaN(story.point)) votedStoryCount += 1;
 
         });
-        if(votedStoryCount === this.storyList.length && votedStoryCount !==0 ){
+        if (votedStoryCount === this.storyList.length && votedStoryCount !== 0) {
           this.endVoteEnabled = true
         }
         if (voteCount === this.voteList.length) {
-           this.endVoteEnabled = true
-        }
-        else {
+          this.endVoteEnabled = true
+        } else {
           this.endVoteEnabled = false
         }
       }
