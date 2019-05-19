@@ -1,10 +1,13 @@
 const express = require('express');
-const pokerController = require('./controllers/PokerController');
+const pokerController = require('./controllers/poker.controller');
 
 module.exports = function (app) {
   let apiRoutes = express.Router();
-  apiRoutes.post('/create-poker')
+
+  apiRoutes.post('/createPoker', pokerController.createPoker)
+  apiRoutes.get('/getStories', pokerController.getStories)
+  apiRoutes.get('/getVotes', pokerController.getVotes)
 
 
-  app.use('/api', apiRoutes, pokerController.create);
+  app.use('/api', apiRoutes);
 }

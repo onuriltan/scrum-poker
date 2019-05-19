@@ -4,42 +4,54 @@
       <b-table class="h-100" bordered :items="storyList"></b-table>
     </div>
     <div class="col">
-      <b-card class="h-100 card-body" body-class="card-body" title="Scrum Master Panel">
-        <b-card-text>
-          <div class="p-2">Voter 1: Not Voted</div>
-          <div class="p-2">Voter 2: Not Voted</div>
-          <div class="p-2">Voter 3: Not Voted</div>
-          <div class="p-2">Voter 4: Not Voted</div>
-          <div class="p-2">Scrum Master: Not Voted</div>
-        </b-card-text>
-        <b-button variant="primary" class="float-left">End Voting For Story 1</b-button>
-      </b-card>
+      <MasterPanel :storyName="currentStory.name" :poker-name="pokerName"/>
+    </div>
+    <div class="col">
+      <ActiveStory />
     </div>
   </div>
 </template>
 
 <script>
   import pokerService from '../services/poker.service'
+  import MasterPanel from "../components/MasterPanel";
+  import ActiveStory from "../components/ActiveStory";
 
   export default {
     name: "MasterDashboard",
+    components: {ActiveStory, MasterPanel},
     data() {
       return {
-        storyList: []
+        storyList: [],
+        currentStory: "",
+        pokerName: this.$route.params.pokerName
       }
     },
     mounted() {
-      pokerService.getStoriesByPokerName(this.$route.params.pokerName).then(res => {
-        this.storyList = res.data
-      }).catch(err => {
-        console.log(err)
-      })
+      this.getStories()
+      this.currentStory = this.getCurrentStory()
+    },
+    methods: {
+      getStories() {
+        pokerService.getStories(this.pokerName).then(res => {
+          this.storyList = res.data
+          this.currentStory = this.storyList.find(story => {return story.status === 'Not Voted'})
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      getVotes() {
+        pokerService.getVotes(this.pokerName, this.currentStory).then(res => {
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      getCurrentStory() {
+        return this.storyList.find(story => {return story.status === 'Not Voted'})
+      }
     }
   }
 </script>
 
 <style scoped>
-.card-body {
-  display: flex;justify-content: space-between;flex-direction: column;
-}
 </style>

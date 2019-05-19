@@ -6,7 +6,7 @@ class PokerService {
   static create (data) {
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.post(`${url}/create`, data)
+        const res = await axios.post(`${url}/createPoker`, data)
         resolve(res)
       } catch (e) {
         reject(e.response)
@@ -14,10 +14,21 @@ class PokerService {
     })
   }
 
-  static getStoriesByPokerName (pokerName) {
+  static getStories (pokerName) {
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.get(`${url}/stories?pokerName=${pokerName}`)
+        const res = await axios.get(`${url}/getStories?poker=${pokerName}`)
+        resolve(res)
+      } catch (e) {
+        reject(e.response)
+      }
+    })
+  }
+
+  static getVotes (storyName, pokerName) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.get(`${url}/getVotes?story=${storyName}&poker=${pokerName}`)
         resolve(res)
       } catch (e) {
         reject(e.response)
