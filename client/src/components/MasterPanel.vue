@@ -8,8 +8,9 @@
       <b-form inline v-if="endVoteEnabled" @submit.prevent="endVoting"
               class="w-100 flex-nowrap align-items-start">
         <label class="sr-only" for="finalVote">Final Vote</label>
-        <b-input id="finalVote" class="mb-2 mr-sm-2 mb-sm-0" placeholder="Final Point" v-model="finalPoint"></b-input>
-        <b-button variant="primary" type="submit">End</b-button>
+        <b-input id="finalVote" class="mb-2 mr-sm-2 mb-sm-0" placeholder="Final Point"
+                 v-model="finalPoint" :disabled="disableButton"></b-input>
+        <b-button variant="primary" :disabled="disableButton" type="submit">End</b-button>
       </b-form>
     </b-card>
   </div>
@@ -27,13 +28,22 @@
     },
     data(){
       return {
-        finalPoint: null
+        finalPoint: null,
+        disableButton: false
       }
     },
     methods: {
       endVoting() {
         pokerService.endVoting(this.storyName, this.pokerName, this.finalPoint)
         this.finalPoint = null;
+        this.disableButton = true
+      }
+    },
+    watch: {
+      storyName: function(newVal, oldVal) {
+        if(newVal !== oldVal){
+          this.disableButton = false
+        }
       }
     }
   }
