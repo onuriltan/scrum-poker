@@ -36,6 +36,10 @@ class ValidationService {
       error = 'Story list required.'
       return error
     }
+    if(storyList.length <=0) {
+      error = 'Story list required.'
+      return error
+    }
     if((new Set(storyList)).size !== storyList.length){
       error = 'Stories must be different'
       return error

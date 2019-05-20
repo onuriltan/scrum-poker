@@ -119,10 +119,15 @@
         }
       },
       toArray(input) {
-        let array = input.split('\n');
-        return array.filter(str => {
-          return str.length > 0 && Boolean
-        });
+        if(input !== null) {
+          let array = input.split('\n');
+          return array.filter(str => {
+            return str.length > 0 && Boolean
+          });
+        }else {
+          return []
+        }
+       
       },
       validateForm() {
         this.errors.pokerName = validationService.pokerName(this.form.name);
